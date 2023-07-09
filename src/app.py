@@ -4,8 +4,10 @@ from fastapi_users import FastAPIUsers
 
 from src.auth.users import auth_backend, fastapi_users
 from src.schemas.users import UserCreate, UserRead, UserUpdate
-from src.auth.db import User
 from src.db.config import CORS_PORT, CORS_HOST
+from src.services.posts import router as posts
+from src.services.likes import router as likes
+from src.services.dislikes import router as dislike
 
 app = FastAPI(title="Webtronics")
 
@@ -41,3 +43,8 @@ app.include_router(
     tags=["users"],
 )
 
+app.include_router(posts)
+
+app.include_router(likes)
+
+app.include_router(dislike)
