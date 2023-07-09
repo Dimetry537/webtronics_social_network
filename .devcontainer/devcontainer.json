@@ -1,0 +1,18 @@
+{
+    "name": "Webtronics",
+    "build": {
+      "context": "../",
+      "dockerfile": "../Dockerfile"
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+			"ms-python.python",
+			"DanielSanMedium.dscodegpt"
+		]
+      }
+    },
+    "forwardPorts": [8000],
+    "runArgs": ["--network=webtronics"],
+    "postStartCommand": ["bash"]
+}
