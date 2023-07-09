@@ -20,7 +20,7 @@ async def create_dislike(
 ):
     repository = DislikesRepository(session)
     try:
-        create_like = await repository.dislike_add(dislike_add=dislike_add, user_id=current_user.id)
-        return create_like
+        create_dislike = await repository.dislike_add(dislike_add=dislike_add, user_id=current_user.id)
+        return create_dislike
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

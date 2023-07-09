@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db.base import get_async_session
@@ -19,6 +19,8 @@ async def create_like(
     current_user: User = Depends(current_active_user)
 ):
     repository = LikesRepository(session)
-    create_like = await repository.like_add(like_add=like_add, user_id=current_user.id)
-    return create_like
-
+    try:
+        create_like = await repository.like_add(like_add=like_add, user_id=current_user.id)
+        return create_like
+    except ValueError as e:
+        raise HTTPException (status_code=400, detail=str(e))
