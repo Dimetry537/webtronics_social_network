@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db.base import get_async_session
-from src.schemas.posts import PostsResponse
+from src.schemas.posts import PostsResponse, PostsRequest
 from src.auth.users import current_active_user
 from src.models.users import User
 from src.repository.posts import PostsRepository
@@ -12,7 +12,7 @@ router = APIRouter(
     tags=["Posts"]
 )
 
-@router.post('/', response_model=PostsResponse)
+@router.post('/', response_model=PostsRequest)
 async def create_post(
     users_post: PostsResponse,
     session: AsyncSession = Depends(get_async_session),
